@@ -1,5 +1,5 @@
 /* ===========================
-   Modern, JS-free, robust CSS with dynamic movement
+   Modern, JS-free, robust CSS with 360-degree flip and rotations
    =========================== */
 
 /* Defining cascade layers for better specificity control */
@@ -55,7 +55,7 @@
     container-name: main-container;
   }
 
-  /* Links with subtle sway */
+  /* Links with rotational sway */
   a {
     color: var(--accent-2);
     text-decoration: none;
@@ -94,7 +94,7 @@
     animation: headerSpin 18s linear infinite, headerParallax 2s var(--float-easing) infinite alternate;
     filter: blur(30px);
     z-index: 0;
-    transform: translateZ(-20px); /* Parallax effect */
+    transform: translateZ(-20px);
   }
   @keyframes headerSpin {
     to { transform: rotate(360deg) translateZ(-20px); }
@@ -114,19 +114,24 @@
     border: 4px solid var(--accent);
     box-shadow: 0 0 0 4px #00000055, 0 0 28px var(--accent), 0 0 48px var(--accent-2);
     transition: transform 0.4s var(--easing), box-shadow 0.4s var(--easing);
-    animation: float 4s var(--float-easing) infinite alternate;
+    animation: spinProfile 10s linear infinite, float 4s var(--float-easing) infinite alternate;
     will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
   .profile-img:hover {
-    transform: scale(1.06) rotate(2deg) translateZ(10px);
+    transform: scale(1.06) rotateY(10deg) translateZ(20px);
     box-shadow: 0 0 0 4px #00000055, 0 0 40px var(--accent), 0 0 70px var(--accent-2);
     animation-play-state: paused;
   }
+  @keyframes spinProfile {
+    to { transform: rotateY(360deg); }
+  }
   @keyframes float {
-    to { transform: translateY(-8px); }
+    to { transform: translateY(-8px) rotateY(360deg); }
   }
 
-  /* Headings with subtle pulse */
+  /* Headings with pulse */
   h1, h2, h3 {
     color: var(--accent);
     text-shadow: 0 0 12px var(--accent), 0 0 20px var(--accent-2);
@@ -148,7 +153,7 @@
     margin: 0.25rem 0;
   }
 
-  /* Sections with scroll-triggered 3D entrance */
+  /* Sections with 3D entrance */
   section {
     margin: 46px 0;
     padding: 24px;
@@ -169,7 +174,6 @@
   @keyframes cardIn {
     to { opacity: 1; transform: translateY(0) rotateX(0); }
   }
-  /* Staggered reveal */
   .container section:nth-of-type(1) { animation-delay: 0.05s; }
   .container section:nth-of-type(2) { animation-delay: 0.12s; }
   .container section:nth-of-type(3) { animation-delay: 0.19s; }
@@ -195,7 +199,7 @@
     }
   }
 
-  /* Lists with sway effect */
+  /* Lists with rotational sway */
   ul {
     list-style: none;
     padding: 0;
@@ -217,7 +221,7 @@
     background: linear-gradient(90deg, #00ffd52e, #ff47ff2e);
   }
 
-  /* Project Grid with 3D tilt */
+  /* Project Grid with 360-degree flip */
   .project-grid {
     display: grid;
     gap: 22px;
@@ -226,28 +230,49 @@
     perspective: 800px;
   }
   .project-card {
-    display: grid;
-    grid-template: subgrid;
+    position: relative;
     background: #00000050;
     border: 1px solid #ff47ff3a;
     border-radius: 12px;
-    padding: 18px;
-    transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing), border-color 0.3s var(--easing);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    mix-blend-mode: normal;
     transform-style: preserve-3d;
-    animation: floatCard 5s var(--float-easing) infinite alternate;
     will-change: transform;
   }
-  .project-card:hover {
-    transform: translateY(-6px) scale(1.02) rotateX(8deg) rotateY(5deg);
-    box-shadow: 0 16px 50px rgba(255, 71, 255, 0.25), 0 10px 26px rgba(0, 255, 213, 0.22);
-    border-color: #ff47ff66;
-    mix-blend-mode: screen;
-    animation-play-state: paused;
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s var(--easing);
+    transform-style: preserve-3d;
   }
-  @keyframes floatCard {
-    to { transform: translateY(-10px) rotateX(2deg); }
+  .project-card:hover .card-inner {
+    transform: rotateY(360deg);
+  }
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .card-front {
+    background: #00000050;
+    border: 1px solid #ff47ff3a;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    mix-blend-mode: normal;
+  }
+  .card-back {
+    background: linear-gradient(135deg, #00ffd51a, #ff47ff1a);
+    border: 1px solid #00ffd54a;
+    transform: rotateY(180deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    mix-blend-mode: screen;
+    color: var(--text);
+  }
+  .project-card:hover {
+    border-color: #ff47ff66;
+    box-shadow: 0 16px 50px rgba(255, 71, 255, 0.25), 0 10px 26px rgba(0, 255, 213, 0.22);
   }
 
   /* Scroll Snap for Project Grid on Small Screens */
@@ -262,11 +287,10 @@
     .project-card {
       flex: 0 0 280px;
       scroll-snap-align: start;
-      animation: none; /* Disable float for scroll snap */
     }
   }
 
-  /* Visuals with 3D flip effect */
+  /* Visuals with rotational sway */
   #visuals img {
     max-width: 100%;
     display: block;
@@ -279,17 +303,17 @@
     animation: floatImage 6s var(--float-easing) infinite alternate;
   }
   #visuals img:hover {
-    transform: translateY(-8px) scale(1.03) rotateY(10deg);
+    transform: translateY(-8px) scale(1.03) rotateY(360deg);
     filter: saturate(1.1) brightness(1.1);
     box-shadow: 0 14px 44px rgba(0, 255, 213, 0.30);
     mix-blend-mode: lighten;
     animation-play-state: paused;
   }
   @keyframes floatImage {
-    to { transform: translateY(-12px) rotateX(3deg); }
+    to { transform: translateY(-12px) rotateY(5deg); }
   }
 
-  /* Footer with subtle fade-in */
+  /* Footer with fade-in */
   footer {
     text-align: center;
     padding: 24px;
@@ -318,6 +342,9 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
+      transform: none !important;
+    }
+    .card-inner, .profile-img, #visuals img {
       transform: none !important;
     }
   }
