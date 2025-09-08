@@ -20,15 +20,15 @@
 /* Theme layer: Custom properties */
 @layer theme {
   :root {
-    --bg1: #2D2D2A;
-    --bg2: #4C4C47;
-    --card: #E5DCC510; /* glass base */
-    --card-border: #C149534a; /* subtle border */
-    --accent: #C14953;
-    --accent-2: #848FA5;
-    --text: #E5DCC5;
-    --muted: #848FA5;
-    --shadow: 0 10px 30px rgba(45, 45, 42, 0.35);
+    --bg1: #0b0b1e;
+    --bg2: #1a1a44;
+    --card: #ffffff10; /* glass base */
+    --card-border: #00ffd54a; /* subtle neon border */
+    --accent: #00ffd5;
+    --accent-2: #ff47ff;
+    --text: #f5f7fb;
+    --muted: #b9c0d0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     --easing: cubic-bezier(0.2, 0.7, 0.2, 1);
     --float-easing: cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -39,8 +39,8 @@
   body {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
     color: var(--text);
-    background: radial-gradient(1200px 800px at 10% -10%, #4C4C4755, transparent 60%),
-                radial-gradient(900px 600px at 110% 10%, #848FA555, transparent 60%),
+    background: radial-gradient(1200px 800px at 10% -10%, #1f1f5a55, transparent 60%),
+                radial-gradient(900px 600px at 110% 10%, #3a1f5a55, transparent 60%),
                 linear-gradient(135deg, var(--bg1), var(--bg2));
     line-height: 1.6;
     overflow-x: hidden;
@@ -79,10 +79,10 @@
     padding: 72px 20px 56px;
     position: relative;
     overflow: hidden;
-    background: #2D2D2A70;
+    background: #00000070;
     backdrop-filter: saturate(120%) blur(10px);
     -webkit-backdrop-filter: saturate(120%) blur(10px);
-    border-bottom: 1px solid #C1495333;
+    border-bottom: 1px solid #00ffd533;
     mix-blend-mode: overlay;
     transform-style: preserve-3d;
   }
@@ -90,7 +90,7 @@
     content: "";
     position: absolute;
     inset: -40%;
-    background: conic-gradient(from 90deg, #C149532a, #848FA52a, transparent 70%);
+    background: conic-gradient(from 90deg, #00ffd52a, #ff47ff2a, transparent 70%);
     animation: headerSpin 18s linear infinite, headerParallax 2s var(--float-easing) infinite alternate;
     filter: blur(30px);
     z-index: 0;
@@ -112,14 +112,14 @@
     height: 160px;
     border-radius: 50%;
     border: 4px solid var(--accent);
-    box-shadow: 0 0 0 4px #2D2D2A55, 0 0 28px var(--accent), 0 0 48px var(--accent-2);
+    box-shadow: 0 0 0 4px #00000055, 0 0 28px var(--accent), 0 0 48px var(--accent-2);
     transition: transform 0.4s var(--easing), box-shadow 0.4s var(--easing);
     animation: float 4s var(--float-easing) infinite alternate;
     will-change: transform;
   }
   .profile-img:hover {
     transform: scale(1.06) rotate(2deg) translateZ(10px);
-    box-shadow: 0 0 0 4px #2D2D2A55, 0 0 40px var(--accent), 0 0 70px var(--accent-2);
+    box-shadow: 0 0 0 4px #00000055, 0 0 40px var(--accent), 0 0 70px var(--accent-2);
     animation-play-state: paused;
   }
   @keyframes float {
@@ -138,7 +138,7 @@
     to { text-shadow: 0 0 16px var(--accent), 0 0 28px var(--accent-2); }
   }
   header h2 {
-    color: #E5DCC5;
+    color: #bafcf4;
     text-shadow: none;
     font-weight: 600;
     animation: none;
@@ -183,7 +183,7 @@
 
   section:hover {
     transform: translateY(-6px) rotateX(5deg) translateZ(20px);
-    box-shadow: 0 18px 60px rgba(193, 73, 83, 0.25), 0 10px 30px rgba(132, 143, 165, 0.18);
+    box-shadow: 0 18px 60px rgba(255, 71, 255, 0.25), 0 10px 30px rgba(0, 255, 213, 0.18);
     mix-blend-mode: screen;
   }
 
@@ -202,7 +202,7 @@
     margin: 0;
   }
   ul li {
-    background: linear-gradient(90deg, #C149531a, #848FA51a);
+    background: linear-gradient(90deg, #00ffd51a, #ff47ff1a);
     margin-block: 10px;
     padding: 12px 16px;
     border-radius: 10px;
@@ -214,7 +214,7 @@
   ul li:hover {
     transform: translateX(6px) rotateY(3deg);
     border-inline-start-color: var(--accent);
-    background: linear-gradient(90deg, #C149532e, #848FA52e);
+    background: linear-gradient(90deg, #00ffd52e, #ff47ff2e);
   }
 
   /* Project Grid with 3D tilt */
@@ -228,12 +228,12 @@
   .project-card {
     display: grid;
     grid-template: subgrid;
-    background: #2D2D2A50;
-    border: 1px solid #848FA53a;
+    background: #00000050;
+    border: 1px solid #ff47ff3a;
     border-radius: 12px;
     padding: 18px;
     transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing), border-color 0.3s var(--easing);
-    box-shadow: 0 6px 20px rgba(45, 45, 42, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     mix-blend-mode: normal;
     transform-style: preserve-3d;
     animation: floatCard 5s var(--float-easing) infinite alternate;
@@ -241,8 +241,8 @@
   }
   .project-card:hover {
     transform: translateY(-6px) scale(1.02) rotateX(8deg) rotateY(5deg);
-    box-shadow: 0 16px 50px rgba(193, 73, 83, 0.25), 0 10px 26px rgba(132, 143, 165, 0.22);
-    border-color: #848FA566;
+    box-shadow: 0 16px 50px rgba(255, 71, 255, 0.25), 0 10px 26px rgba(0, 255, 213, 0.22);
+    border-color: #ff47ff66;
     mix-blend-mode: screen;
     animation-play-state: paused;
   }
@@ -273,7 +273,7 @@
     border-radius: 10px;
     margin: 14px 0;
     transition: transform 0.35s var(--easing), box-shadow 0.35s var(--easing), filter 0.35s var(--easing);
-    box-shadow: 0 8px 24px rgba(45, 45, 42, 0.45);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     transform-style: preserve-3d;
     will-change: transform;
     animation: floatImage 6s var(--float-easing) infinite alternate;
@@ -281,7 +281,7 @@
   #visuals img:hover {
     transform: translateY(-8px) scale(1.03) rotateY(10deg);
     filter: saturate(1.1) brightness(1.1);
-    box-shadow: 0 14px 44px rgba(193, 73, 83, 0.30);
+    box-shadow: 0 14px 44px rgba(0, 255, 213, 0.30);
     mix-blend-mode: lighten;
     animation-play-state: paused;
   }
@@ -294,9 +294,9 @@
     text-align: center;
     padding: 24px;
     margin-top: 56px;
-    background: #2D2D2Ab3;
-    border-top: 1px solid #C1495333;
-    color: #848FA5;
+    background: #000000b3;
+    border-top: 1px solid #00ffd533;
+    color: #c7ccda;
     font-size: 0.95rem;
     animation: footerIn 1s var(--easing) forwards;
   }
@@ -306,7 +306,7 @@
   }
 
   /* Small enhancements */
-  strong { color: #E5DCC5; }
+  strong { color: #eafffb; }
   h3 { margin-top: 0.2rem; }
 }
 
